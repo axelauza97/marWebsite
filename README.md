@@ -1,12 +1,16 @@
 # Mar Website
 
-This project is focused to show a Website built with responsive design in pure HTML and CSS, also in React.js framework.
-
-In the other branch `react` has the same Website but using React.js framework that is feed by a Django backend.
+This project is focused to show a Website SPA with responsive design in React.js framework.
 
 ## Installation
 
-Open with live server on visual studio code
+```bash
+  npm install
+```
+
+```bash
+  npm start
+```
 
 #### Develop by Axel Auza
 

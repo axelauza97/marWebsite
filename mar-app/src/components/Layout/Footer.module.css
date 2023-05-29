@@ -1,0 +1,123 @@
+.form {
+  background-color: #223055;
+  color: white;
+  padding: 1rem;
+  text-align: justify;
+}
+
+.input_contact {
+  text-align: center;
+}
+
+.input_contact label {
+  padding: 0 1rem;
+}
+
+.input_contact .container {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+}
+
+.form_button {
+  border-width: 1px;
+  border-color: #dedede;
+  display: block;
+  margin: 0 auto !important;
+  width: 50%;
+  text-align: center;
+  background-color: #39bae6;
+  color: white;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem !important;
+  border-radius: 0.5rem;
+  text-shadow: 0 0 1rem rgb(255, 255, 255);
+  margin: 1rem 0.5rem;
+}
+
+.social,
+.contact {
+  background-color: #13b1e7;
+  color: white;
+  text-align: center;
+}
+
+.contact {
+  padding-top: 1rem;
+}
+
+.social h3 {
+  border-bottom: 1px solid #dedede;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.social_buttons {
+  font-size: 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #dedede;
+  width: 100%;
+}
+
+.contact_container {
+  padding: 1rem;
+}
+
+.fab {
+  padding: 0 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  .footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  .form {
+    grid-row: 1/1;
+    grid-column: 1/1;
+  }
+  .social {
+    grid-row: 1/1;
+    grid-column: 2/3;
+    padding: 0;
+  }
+  .social_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .social h3 {
+    border-bottom: 0;
+  }
+  .contact {
+    grid-row: 2/3;
+    grid-column: 1/3;
+    padding: 1rem;
+    background-color: #b6e8ff;
+  }
+  .social_buttons {
+    border-bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .social {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(min-content, 35rem) 1fr;
+  }
+  .contact_container {
+    grid-column: 1/2;
+  }
+  .form {
+    display: grid;
+    grid-template-columns: 1fr minmax(min-content, 35rem);
+  }
+  .form_container {
+    grid-column: 2/3;
+  }
+}

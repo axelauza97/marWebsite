@@ -1,0 +1,26 @@
+.section_trips {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.trip_article {
+  padding: 1rem 3rem 0 3rem;
+}
+
+.trip_article h1 {
+  color: #13b1e7;
+  padding-left: 0.5rem;
+}
+
+.trip_article p {
+  border-left: solid 0.1rem #dedede;
+  padding-left: 0.5rem;
+  text-align: justify;
+}
+
+@media screen and (min-width: 700px) {
+  .trips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
+}

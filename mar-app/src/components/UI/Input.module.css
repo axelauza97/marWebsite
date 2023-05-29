@@ -1,0 +1,15 @@
+.input_container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+}
+
+.input_container input,
+.input_container textarea {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+input[type="checkbox"] {
+  margin-left: 1rem;
+}
