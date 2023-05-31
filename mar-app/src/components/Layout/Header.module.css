@@ -67,77 +67,26 @@
   justify-content: space-between;
 }
 
-.inputNavToggle {
-  display: none;
-}
-
-.inputNavToggle ~ label {
-  position: relative;
-  padding: 0.25rem;
-  width: 2rem;
-  height: 1.25rem;
-  height: 2rem;
-}
-
-.inputNavToggle ~ label > span,
-.inputNavToggle ~ label > span::before,
-.inputNavToggle ~ label > span::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0.75rem;
-  height: 0.125rem;
-  width: 1.75rem;
-  opacity: 1;
-  background: #fff;
-  transition: 0.14s ease-in-out;
-}
-
-.inputNavToggle ~ label > span::before {
-  top: -0.5rem;
-}
-
-.inputNavToggle ~ label > span::after {
-  top: 0.5rem;
-}
-
-.inputNavToggle:checked ~ label > span {
-  width: 0;
-  background: rgba(18, 18, 18, 0);
-}
-
-.inputNavToggle:checked ~ label > span::before {
-  transform: rotateZ(45deg);
-  top: 0;
-}
-
-.inputNavToggle:checked ~ label > span::after {
-  transform: rotateZ(-45deg);
-  top: 0;
-}
-
-.inputNavToggle:checked ~ nav {
-  left: 0;
-}
-
 .nav {
+  left: -100%;
+  top: 5rem;
+  text-align: center;
+  box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
   position: absolute;
   z-index: -1;
-  top: 5rem;
-  left: -110%;
   width: 100%;
+  height: 100vh;
   transition: 0.22s ease-in-out;
 }
 
-.nav::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  z-index: -1;
-  height: 100vh;
-  width: 100vw;
+.nav.active {
+  left: 0;
   background-color: #13b1e7;
   background-size: cover;
+}
+
+.nav-item {
+  margin: 2.5rem 0;
 }
 
 .nav ul {
@@ -157,12 +106,6 @@
 .nav ul li a:hover {
   color: #36bae6;
   background: #e0e5eb;
-}
-
-.nav ul li:last-of-type::before {
-  content: "";
-  display: block;
-  padding: 0.5rem;
 }
 
 .nav .btn {
@@ -185,6 +128,38 @@
   background-color: #223054;
   box-shadow: inset 0 0 5px #13b1e7;
   color: #fff;
+}
+
+.hamburger {
+  display: block;
+  cursor: pointer;
+  position: relative;
+}
+
+.bar {
+  display: block;
+  width: 1.75rem;
+  height: 0.2rem;
+  margin: 0.5rem auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #fff;
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: rotate(45deg);
+  position: absolute;
+  top: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 0;
 }
 
 @media screen and (min-width: 700px) {
@@ -213,11 +188,13 @@
   .logo {
     padding: 0;
   }
-  .navToggleLabel {
-    display: none;
-  }
   .nav {
-    position: initial;
+    position: static;
+    height: unset;
+    background-color: none;
+  }
+  .nav.active {
+    background-color: transparent;
   }
   .nav ul {
     display: flex;
@@ -230,10 +207,10 @@
   .nav ul li a:hover {
     background: transparent;
   }
-  .nav::after,
-  .nav ul li:last-of-type::before {
+  .hamburger {
     display: none;
-    padding: initial;
+    cursor: pointer;
+    position: static;
   }
   .nav .btn {
     width: auto;

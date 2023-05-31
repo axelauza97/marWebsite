@@ -1,8 +1,20 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import classes from "./Header.module.css";
 import ecosystemsImage from "../../assets/ecoSystems.png";
 import marImage from "../../assets/marLogo.svg";
 const Header = (props) => {
+  const [menu, setMenu] = useState("");
+  const onMenuToggle = (event) => {
+    if (menu == classes.active) {
+      setMenu("");
+    } else {
+      setMenu(classes.active);
+    }
+  };
+  const closeMenu = (event) => {
+    setMenu("");
+  };
+
   return (
     <Fragment>
       <section className={classes.info_header}>
@@ -23,38 +35,45 @@ const Header = (props) => {
       </section>
       <section className={classes.navWrap}>
         <img src={marImage} alt="MAR logo" className={classes.logo} />
-        <input
-          type="checkbox"
-          id="navToggle"
-          className={classes.inputNavToggle}
-        />
-        <label htmlFor="navToggle" className={classes.navToggleLabel}>
-          <span></span>
-        </label>
-        <nav className={classes.nav}>
+        <nav className={`${classes.nav} ${menu}`}>
           <ul>
             <li>
-              <a href="#home">Home</a>
+              <a href="#home" onClick={closeMenu}>
+                Home
+              </a>
             </li>
             <li>
-              <a href="#team">About</a>
+              <a href="#team" onClick={closeMenu}>
+                About
+              </a>
             </li>
             <li>
-              <a href="#gallery">Gallery</a>
+              <a href="#gallery" onClick={closeMenu}>
+                Gallery
+              </a>
             </li>
             <li>
-              <a href="#problem">Blog</a>
+              <a href="#problem" onClick={closeMenu}>
+                Blog
+              </a>
             </li>
             <li>
-              <a href="#contact">Contact</a>
+              <a href="#contact" onClick={closeMenu}>
+                Contact
+              </a>
             </li>
             <li>
-              <a href="#trips" className={classes.btn}>
+              <a href="#trips" onClick={closeMenu} className={classes.btn}>
                 Book an experience
               </a>
             </li>
           </ul>
         </nav>
+        <div className={`${classes.hamburger} ${menu}`} onClick={onMenuToggle}>
+          <span className={classes.bar}></span>
+          <span className={classes.bar}></span>
+          <span className={classes.bar}></span>
+        </div>
       </section>
     </Fragment>
   );
