@@ -9,6 +9,10 @@ This project is focused to show a Website SPA with responsive design in React.js
 ```
 
 ```bash
+npm install react-router-dom
+```
+
+```bash
   npm start
 ```
 

@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import classes from "./Header.module.css";
 import ecosystemsImage from "../../assets/ecoSystems.png";
 import marImage from "../../assets/marLogo.svg";
+import { NavLink } from "react-router-dom";
 const Header = (props) => {
   const [menu, setMenu] = useState("");
   const onMenuToggle = (event) => {
@@ -20,12 +21,12 @@ const Header = (props) => {
       <section className={classes.info_header}>
         <img src={ecosystemsImage} alt="" />
         <article>
-          <h1>Marine Awareness Retreats</h1>
+          <h1> Marine Awareness Retreats </h1>
           <p>
             We are an organization focused on educating and raising awareness
-            about the importance of our ocean’s ecosystems. We create
-            life-altering experiences that literally change perceptions and
-            perspectives. Join us for an incredible trip that will educate and
+            about the importance of our ocean’ s ecosystems.We create life -
+            altering experiences that literally change perceptions and
+            perspectives.Join us for an incredible trip that will educate and
             forever change you.
           </p>
           <button className={classes.info_button}>
@@ -38,41 +39,26 @@ const Header = (props) => {
         <nav className={`${classes.nav} ${menu}`}>
           <ul>
             <li>
-              <a href="#home" onClick={closeMenu}>
+              <NavLink to="/" onClick={closeMenu}>
                 Home
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#team" onClick={closeMenu}>
-                About
-              </a>
+              <NavLink to="/trips" onClick={closeMenu}>
+                Trips
+              </NavLink>
             </li>
             <li>
-              <a href="#gallery" onClick={closeMenu}>
-                Gallery
-              </a>
-            </li>
-            <li>
-              <a href="#problem" onClick={closeMenu}>
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="#contact" onClick={closeMenu}>
-                Contact
-              </a>
-            </li>
-            <li>
-              <a href="#trips" onClick={closeMenu} className={classes.btn}>
-                Book an experience
-              </a>
+              <NavLink to="/auth" className={classes.btn} onClick={closeMenu}>
+                Create Account / Log in
+              </NavLink>
             </li>
           </ul>
         </nav>
         <div className={`${classes.hamburger} ${menu}`} onClick={onMenuToggle}>
-          <span className={classes.bar}></span>
-          <span className={classes.bar}></span>
-          <span className={classes.bar}></span>
+          <span className={classes.bar}> </span>
+          <span className={classes.bar}> </span>
+          <span className={classes.bar}> </span>
         </div>
       </section>
     </Fragment>

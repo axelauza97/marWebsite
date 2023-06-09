@@ -23,9 +23,8 @@ const Input = React.forwardRef((props, ref) => {
   }`;
 
   return (
-    <div className={classDiv}>
-      <label htmlFor={props.input.id}>{props.label}</label>
-      {input}
+    <div className={`${classDiv}  ${props.className}`}>
+      <label htmlFor={props.input.id}> {props.label} </label> {input}{" "}
     </div>
   );
 });

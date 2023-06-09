@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Input from "../UI/Input";
 import classes from "./Footer.module.css";
+import Button from "../UI/Button";
 const Footer = () => {
   const nameInputRef = useRef();
   const phoneInputRef = useRef();
@@ -67,7 +68,6 @@ const Footer = () => {
                 type: "email",
               }}
             />
-
             <div className={classes.input_contact}>
               <label> Preferred method of contact </label>
               <div className={classes.container}>
@@ -82,7 +82,6 @@ const Footer = () => {
                     id: "emailContact",
                   }}
                 />
-
                 <Input
                   state={contactInput}
                   label="Phone"
@@ -94,7 +93,6 @@ const Footer = () => {
                     id: "phoneContact",
                   }}
                 />
-
                 <Input
                   state={contactInput}
                   label="Text"
@@ -125,7 +123,7 @@ const Footer = () => {
                 type: "checkbox",
               }}
             />
-            <button className={classes.form_button}>Send Request!</button>
+            <Button className={classes.form_button}> Send Request! </Button>
           </form>
         </div>
       </section>
@@ -154,7 +152,7 @@ const Footer = () => {
       <section className={classes.contact}>
         <div className={classes.contact_container}>
           <h3> Contact Information </h3> <div> Phone: 123 - 456 - 7890 </div>
-          <div> Email: axelauza97 @hotmail.com </div>
+          <div> Email : axelauza97 @hotmail.com </div>
           <div> Address: 1234 Ocean Ave </div> <div> Axel Auza A @2023 </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import React from "react";
 import classes from "./SectionTrips.module.css";
 import Trip from "./Trip";
 
