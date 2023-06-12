@@ -64,7 +64,7 @@ const Footer = () => {
               ref={emailInputRef}
               label="Email: "
               input={{
-                id: "email",
+                id: "emaiForm",
                 type: "email",
               }}
             />
@@ -131,19 +131,19 @@ const Footer = () => {
         <div className={classes.social_container}>
           <h3> Lets be Social - connect with us! </h3>
           <div className={classes.social_buttons}>
-            <a>
+            <a href="instagram.com">
               <i className={classes.fab + ` fab fa-instagram`}> </i>
             </a>
-            <a>
+            <a href="instagram.com">
               <i className={classes.fab + ` fab fa-youtube`}> </i>
             </a>
-            <a>
+            <a href="instagram.com">
               <i className={classes.fab + ` fab fa-linkedin-in`}> </i>
             </a>
-            <a>
+            <a href="instagram.com">
               <i className={classes.fab + ` fab fa-facebook-f`}> </i>
             </a>
-            <a>
+            <a href="instagram.com">
               <i className={classes.fab + ` fab fa-twitter`}> </i>
             </a>
           </div>

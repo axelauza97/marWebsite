@@ -3,12 +3,12 @@ import classes from "./Input.module.css";
 
 const Input = React.forwardRef((props, ref) => {
   let input;
-  if (props.input.type == "textarea") {
+  if (props.input.type === "textarea") {
     input = <textarea ref={ref} {...props.input} />;
-  } else if (props.input.type == "radio") {
+  } else if (props.input.type === "radio") {
     input = (
       <input
-        checked={props.state == props.input.value}
+        checked={props.state === props.input.value}
         onChange={props.onChange}
         {...props.input}
       />
@@ -17,7 +17,7 @@ const Input = React.forwardRef((props, ref) => {
     input = <input ref={ref} {...props.input} />;
   }
   const classDiv = `${
-    props.input.type != "radio" && props.input.type != "checkbox"
+    props.input.type !== "radio" && props.input.type !== "checkbox"
       ? classes.input_container
       : ""
   }`;

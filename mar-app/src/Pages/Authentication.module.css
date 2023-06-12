@@ -39,3 +39,10 @@
     grid-row: 4/5;
   }
 }
+
+@media screen and (min-width: 1000px) {
+  .containerAuth {
+    margin: 2rem auto;
+    max-width: 75rem;
+  }
+}

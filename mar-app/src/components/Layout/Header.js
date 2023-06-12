@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import classes from "./Header.module.css";
 import ecosystemsImage from "../../assets/ecoSystems.png";
 import marImage from "../../assets/marLogo.svg";
@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const Header = (props) => {
   const [menu, setMenu] = useState("");
   const onMenuToggle = (event) => {
-    if (menu == classes.active) {
+    if (menu === classes.active) {
       setMenu("");
     } else {
       setMenu(classes.active);
@@ -17,12 +17,12 @@ const Header = (props) => {
   };
 
   return (
-    <Fragment>
+    <div className={classes.containerHeader}>
       <section className={classes.info_header}>
         <img src={ecosystemsImage} alt="" />
         <article>
-          <h1> Marine Awareness Retreats </h1>
-          <p>
+          <h1 className={classes.shadow}> Marine Awareness Retreats </h1>
+          <p className={classes.shadow}>
             We are an organization focused on educating and raising awareness
             about the importance of our ocean’ s ecosystems.We create life -
             altering experiences that literally change perceptions and
@@ -61,7 +61,7 @@ const Header = (props) => {
           <span className={classes.bar}> </span>
         </div>
       </section>
-    </Fragment>
+    </div>
   );
 };
 export default Header;

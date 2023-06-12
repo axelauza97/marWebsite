@@ -45,6 +45,10 @@
   margin: 1rem 0.5rem;
 }
 
+.shadow {
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.9);
+}
+
 /* ############ Navigation ############ */
 
 .logo {

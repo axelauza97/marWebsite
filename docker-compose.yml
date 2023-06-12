@@ -1,0 +1,29 @@
+version: "3"
+services:
+  mar-app:
+    build:
+      context: .
+      dockerfile: ./mar-app/Dockerfile
+    ports:
+      - "80:80"
+    container_name: mar-app
+    tty: true
+    networks:
+      - mar-net
+  mar-backend:
+    build:
+      context: .
+      dockerfile: ./mar-backend/Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: mar-backend
+    tty: true
+    networks:
+      - mar-net
+
+networks:
+  mar-net:
+    external:
+      name: mar_network
+# docker network create mar_network
+# docker-compose up --build

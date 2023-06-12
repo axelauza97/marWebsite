@@ -5,15 +5,11 @@ This project is focused to show a Website SPA with responsive design in React.js
 ## Installation
 
 ```bash
-  npm install
+docker network create mar_network
 ```
 
 ```bash
-npm install react-router-dom
-```
-
-```bash
-  npm start
+  docker-compose up --build
 ```
 
 #### Develop by Axel Auza

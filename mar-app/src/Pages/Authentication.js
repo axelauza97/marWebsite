@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { useRef } from "react";
 import classes from "./Authentication.module.css";
 import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";

@@ -1,11 +1,13 @@
 import React, { useRef } from "react";
 import { Form } from "react-router-dom";
 import Input from "../UI/Input";
+import classes from "./TripForm.module.css";
+
 function TripForm({ method, event }) {
   const titleInputRef = useRef();
   const bodyInputRef = useRef();
   return (
-    <Form>
+    <Form className={classes.containerForm}>
       <Input
         ref={titleInputRef}
         label="Title:"
