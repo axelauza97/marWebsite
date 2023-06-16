@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import classes from "./Header.module.css";
 import ecosystemsImage from "../../assets/ecoSystems.png";
 import marImage from "../../assets/marLogo.svg";
@@ -17,7 +17,7 @@ const Header = (props) => {
   };
 
   return (
-    <div className={classes.containerHeader}>
+    <Fragment>
       <section className={classes.info_header}>
         <img src={ecosystemsImage} alt="" />
         <article>
@@ -61,7 +61,7 @@ const Header = (props) => {
           <span className={classes.bar}> </span>
         </div>
       </section>
-    </div>
+    </Fragment>
   );
 };
 export default Header;

@@ -3,17 +3,24 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Root from "./Pages/Root";
 import Home, { loader as eventsLoader } from "./Pages/Home";
-import Authentication from "./Pages/Authentication";
+import Authentication, { action as authenticationAction } from "./Pages/Authentication";
 import NewTripPage from "./Pages/NewTripPage";
+import { tokenLoader } from "./components/util/auth";
+import { action as logoutAction } from './Pages/Logout';
 
 const router = createBrowserRouter([{
   path: "/",
   element: < Root />,
   id: "root",
+  loader: tokenLoader,
   children: [
     { index: true, element: < Home />, loader: eventsLoader },
-    { path: "auth", element: < Authentication /> },
+    { path: "auth", element: < Authentication />, action: authenticationAction },
     { path: "trips", children: [{ index: true, element: < NewTripPage /> }] },
+    {
+      path: 'logout',
+      action: logoutAction,
+    },
   ],
 },]);
 
