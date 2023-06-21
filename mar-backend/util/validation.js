@@ -16,6 +16,5 @@ function isValidEmail(value) {
 }
 
 exports.isValidText = isValidText;
-exports.isValidDate = isValidDate;
 exports.isValidImageUrl = isValidImageUrl;
 exports.isValidEmail = isValidEmail;

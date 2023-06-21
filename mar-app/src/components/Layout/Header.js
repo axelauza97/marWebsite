@@ -2,9 +2,11 @@ import React, { Fragment, useState } from "react";
 import classes from "./Header.module.css";
 import ecosystemsImage from "../../assets/ecoSystems.png";
 import marImage from "../../assets/marLogo.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLoaderData, useSubmit } from "react-router-dom";
 const Header = (props) => {
   const [menu, setMenu] = useState("");
+  const token = useLoaderData();
+  const submit = useSubmit();
   const onMenuToggle = (event) => {
     if (menu === classes.active) {
       setMenu("");
@@ -15,7 +17,16 @@ const Header = (props) => {
   const closeMenu = (event) => {
     setMenu("");
   };
-
+  const logOut = () => {
+    const proceed = window.confirm("Are you sure to logout?");
+    if (proceed) {
+      submit(null, {
+        method: "post",
+        action: "/logout",
+        replace: true,
+      });
+    }
+  };
   return (
     <Fragment>
       <section className={classes.info_header}>
@@ -43,16 +54,27 @@ const Header = (props) => {
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/trips" onClick={closeMenu}>
-                Trips
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/auth" className={classes.btn} onClick={closeMenu}>
-                Create Account / Log in
-              </NavLink>
-            </li>
+            {token && (
+              <li>
+                <NavLink to="/trips" onClick={closeMenu}>
+                  Trips
+                </NavLink>
+              </li>
+            )}
+            {token && (
+              <li>
+                <NavLink className={classes.btn} onClick={logOut}>
+                  Log Out
+                </NavLink>
+              </li>
+            )}
+            {!token && (
+              <li>
+                <NavLink to="/auth" className={classes.btn} onClick={closeMenu}>
+                  Create Account / Log in
+                </NavLink>
+              </li>
+            )}
           </ul>
         </nav>
         <div className={`${classes.hamburger} ${menu}`} onClick={onMenuToggle}>

@@ -3,7 +3,7 @@ import classes from "./SectionTrips.module.css";
 import Trip from "./Trip";
 
 const SectionTrips = (props) => {
-  const tripsList = props.events.map((trip) => (
+  const tripsList = props.trips.map((trip) => (
     <Trip
       key={trip.id}
       title={trip.title}

@@ -3,11 +3,11 @@ import SectionTrips from "../components/Trips/SectionTrips";
 import { Await, defer, json, useLoaderData } from "react-router";
 
 function Home() {
-  const { events } = useLoaderData();
+  const { trips } = useLoaderData();
   return (
     <Suspense fallback={<p style={{ textAlign: "center" }}> Loading... </p>}>
-      <Await resolve={events}>
-        {(loadedEvents) => <SectionTrips events={loadedEvents} />}
+      <Await resolve={trips}>
+        {(loadedTrips) => <SectionTrips trips={loadedTrips} />}
       </Await>
     </Suspense>
   );
@@ -16,7 +16,7 @@ function Home() {
 
 export default Home;
 
-async function loadEvents() {
+async function loadTrips() {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
@@ -25,7 +25,7 @@ async function loadEvents() {
     //   status: 500,
     // });
     throw json(
-      { message: "Could not fetch events." },
+      { message: "Could not fetch trips." },
       {
         status: 500,
       }
@@ -38,6 +38,6 @@ async function loadEvents() {
 
 export function loader() {
   return defer({
-    events: loadEvents(),
+    trips: loadTrips(),
   });
 }

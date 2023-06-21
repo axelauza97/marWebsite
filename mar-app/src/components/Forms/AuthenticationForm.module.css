@@ -12,6 +12,11 @@
 .form_button {
   display: block;
   width: 80%;
+  height: fit-content;
+}
+
+.containerAuth h1 {
+  color: #13b1e7;
 }
 
 @media screen and (min-width: 700px) {
@@ -37,6 +42,10 @@
   .containerButton {
     grid-column: 2/3;
     grid-row: 4/5;
+    margin: 1rem 0rem auto auto !important;
+  }
+  .form_button {
+    margin: 1rem 0rem auto auto !important;
   }
 }
 

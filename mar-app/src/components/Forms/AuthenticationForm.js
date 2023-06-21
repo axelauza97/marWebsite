@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./AuthenticationForm.module.css";
-import { useActionData, useNavigate, useSubmit } from "react-router-dom";
+import {
+  useActionData,
+  useNavigate,
+  useNavigation,
+  useSubmit,
+} from "react-router-dom";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 
@@ -12,34 +17,32 @@ function AuthenticationForm() {
   const data = useActionData();
 
   const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
     navigate({
       search: "?mode=login",
     });
+    console.log("effect");
   }, []);
 
   const modeHandler = () => {
-    setIsLogin((prev) => !prev);
     navigate({
       search: `?mode=${isLogin ? "signup" : "login"}`,
     });
+    setIsLogin((prev) => !prev);
   };
   const postHandler = (event) => {
     event.preventDefault();
     let formData = new FormData();
     formData.append("email", emailInputRef.current.value);
     formData.append("password", passwordInputRef.current.value);
-    submit(formData, { action: "", method: "post" });
+    submit(formData, { method: "post", replace: true });
   };
-  console.log(data);
   return (
     <div className={classes.containerAuth}>
-      {data && data.message && alert(data.message)}
-      {data &&
-        data.errors &&
-        alert(`${Object.values(data.errors).map((err) => err)}`)}
-
       <h1> {isLogin ? "Log In" : "Sign Up"} </h1>
       <Input
         className={classes.form_input}
@@ -57,10 +60,18 @@ function AuthenticationForm() {
         <Button className={classes.form_button} onClick={modeHandler}>
           {isLogin ? "Sign Up" : "Login"}
         </Button>
-        <Button className={classes.form_button} onClick={postHandler}>
+        <Button
+          className={classes.form_button}
+          onClick={postHandler}
+          disabled={isSubmitting}
+        >
           {isLogin ? "Login" : "Save"}
         </Button>
       </div>
+      {data && <div>{data.message}</div>}
+      {data && data.errors && (
+        <div>{Object.values(data.errors).map((err) => err)} </div>
+      )}
     </div>
   );
 }

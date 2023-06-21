@@ -1,0 +1,32 @@
+.nav {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.nav h3 {
+  color: #13b1e7;
+}
+
+.list {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.list li {
+  list-style: none;
+}
+
+.list a {
+  text-decoration: none;
+}
+
+.list a:hover,
+.list a.active h3 {
+  border: 0;
+  border: 1px solid #13b1e7;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
