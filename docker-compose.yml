@@ -2,8 +2,8 @@ version: "3"
 services:
   mar-app:
     build:
-      context: .
-      dockerfile: ./mar-app/Dockerfile
+      context: ./mar-app/
+      dockerfile: ./Dockerfile
     ports:
       - "80:80"
     container_name: mar-app
@@ -12,8 +12,8 @@ services:
       - mar-net
   mar-backend:
     build:
-      context: .
-      dockerfile: ./mar-backend/Dockerfile
+      context: ./mar-backend/
+      dockerfile: ./Dockerfile
     ports:
       - "8080:8080"
     container_name: mar-backend
