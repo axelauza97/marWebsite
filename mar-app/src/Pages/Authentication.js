@@ -11,19 +11,23 @@ export default Authentication;
 
 export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
-  const mode = searchParams.get("mode") || "login";
+  let mode = searchParams.get("mode") || "login";
 
   if (mode !== "login" && mode !== "signup") {
     throw json({ message: "Unsupported mode." }, { status: 422 });
   }
-
+  if (mode === "signup") {
+    mode = "user/create/";
+  } else if (mode === "login") {
+    mode = "login/";
+  }
   const data = await request.formData();
   const authData = {
-    email: data.get("email"),
+    username: data.get("email"),
     password: data.get("password"),
   };
 
-  const response = await fetch("http://localhost:8080/" + mode, {
+  const response = await fetch("http://127.0.0.1:8000/api/" + mode, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,11 +44,12 @@ export async function action({ request }) {
   }
 
   const resData = await response.json();
-  const token = resData.token;
+  const tokens = resData;
 
-  localStorage.setItem("token", token);
+  localStorage.setItem("token", tokens.access);
+  localStorage.setItem("token_refresh", tokens.refresh);
   const expiration = new Date();
-  expiration.setHours(expiration.getHours() + 1);
+  expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem("expiration", expiration.toISOString());
 
   return redirect("/");

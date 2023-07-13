@@ -17,3 +17,12 @@ docker-compose up --build
 #### Develop by Axel Auza
 
 #### 🚀 Thanks for being here
+
+```bash
+mkdir migrations
+python manage.py makemigrations api
+python manage.py migrate api
+python manage.py migrate
+python load_fixtures.py
+python manage.py crontab add
+```

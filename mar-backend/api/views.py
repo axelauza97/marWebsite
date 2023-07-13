@@ -6,6 +6,8 @@ from rest_framework.permissions import AllowAny,IsAuthenticated,IsAdminUser
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import *
 from .serializer import *
@@ -18,25 +20,40 @@ class CreateUser(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        token = Token.objects.create(user=user)
+        token = RefreshToken.for_user(user)
         print(token)
-        print(type( token.key))
         return Response(
-            {"data": serializer.data,
-            "token": token.key}, status=status.HTTP_201_CREATED)
+            {
+                "data": serializer.data,
+                "refresh": str(token), 
+                "access": str(token.access_token)
+                
+            }, status=status.HTTP_201_CREATED)
 
-class ObtainAuthTokenView(ObtainAuthToken):
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+    
+class CreateTrip(generics.CreateAPIView):
     permission_classes = (AllowAny,)
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        print(token)
-        print(created)
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'username': user.username
-        })
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+class GetTrip(generics.RetrieveAPIView):
+    permission_classes = (AllowAny,)
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+class ListTrip(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+class DeleteTrip(generics.DestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+class UpdateTrip(generics.UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer

@@ -16,11 +16,11 @@ function TripForm({ method, trip }) {
     let formData = new FormData();
     formData.append("title", titleInputRef.current.value);
     formData.append("body", bodyInputRef.current.value);
-    formData.append("image", trip ? trip.image : "trip01");
     formData.append("button", trip ? trip.button : titleInputRef.current.value);
     if (method === "PATCH") {
       submit(formData, { method: method });
     } else {
+      formData.append("image", trip ? trip.image : "trip01");
       submit(formData, { method: "post", replace: true });
     }
   };

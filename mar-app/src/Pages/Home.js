@@ -17,7 +17,7 @@ function Home() {
 export default Home;
 
 async function loadTrips() {
-  const response = await fetch("http://localhost:8080/events");
+  const response = await fetch("http://127.0.0.1:8000/api/trip/");
 
   if (!response.ok) {
     // return {isError: true, message: 'Could not fetch events.' };
@@ -32,7 +32,7 @@ async function loadTrips() {
     );
   } else {
     const resData = await response.json();
-    return resData.events;
+    return resData;
   }
 }
 

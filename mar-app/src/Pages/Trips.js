@@ -18,7 +18,7 @@ function Trips() {
 export default Trips;
 
 async function loadTrips() {
-  const response = await fetch("http://localhost:8080/events");
+  const response = await fetch("http://localhost:8080/api/trip/");
 
   if (!response.ok) {
     // return { isError: true, message: 'Could not fetch events.' };
@@ -26,7 +26,7 @@ async function loadTrips() {
     //   status: 500,
     // });
     throw json(
-      { message: "Could not fetch events." },
+      { message: "Could not fetch trips." },
       {
         status: 500,
       }

@@ -17,7 +17,7 @@ function TripDetailPage() {
 export default TripDetailPage;
 
 async function loadTrip(id) {
-  const response = await fetch("http://localhost:8080/events/" + id);
+  const response = await fetch("http://127.0.0.1:8000/api/trip/" + id + "/");
 
   if (!response.ok) {
     throw json(
@@ -28,7 +28,7 @@ async function loadTrip(id) {
     );
   } else {
     const resData = await response.json();
-    return resData.event;
+    return resData;
   }
 }
 
