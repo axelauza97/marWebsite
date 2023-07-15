@@ -1,0 +1,7 @@
+Django>=2.2.7.0
+djangorestframework>=3.10.3
+django-cors-headers>=3.5.0
+django_crontab
+djangorestframework-simplejwt>=5.2.2
+Pillow
+argon2-cffi

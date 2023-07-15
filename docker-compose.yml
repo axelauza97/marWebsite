@@ -1,25 +1,26 @@
 version: "3"
 services:
-  mar-app:
+  mar-app-react:
     build:
       context: ./mar-app/
       dockerfile: ./Dockerfile
     ports:
       - "80:80"
-    container_name: mar-app
+    container_name: mar-app-react
     tty: true
     networks:
       - mar-net
-  mar-backend:
+  mar-backend-django:
     build:
       context: ./mar-backend/
       dockerfile: ./Dockerfile
     ports:
-      - "8080:8080"
-    container_name: mar-backend
+      - "8000:8000"
+    container_name: mar-backend-django
     tty: true
     networks:
       - mar-net
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
 
 networks:
   mar-net:

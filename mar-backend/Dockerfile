@@ -1,19 +1,26 @@
-FROM node:16-alpine
+# The first instruction is what image we want to base our container on
+# We Use an official Python runtime as a parent image
+FROM python:3.7
 
-# Create app directory
-WORKDIR /usr/src/app
+# The enviroment variable ensures that the python output is set straight
+# to the terminal with out buffering it first
+ENV PYTHONUNBUFFERED 1
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# create root directory for our project in the container
+RUN mkdir /marWebsite
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --omit=dev
+# Set the working directory to /marWebsite
+WORKDIR /marWebsite
+RUN python -m pip install --upgrade pip
 
-# Bundle app source
-COPY . .
+# Copy the current directory contents into the container at /marWebsite
+ADD . /marWebsite/
 
-EXPOSE 8080
-CMD [ "npm", "start" ]
+# Install any needed packages specified in requirements.txt
+
+RUN pip install -r requirements.txt
+RUN python manage.py makemigrations api
+RUN python manage.py migrate api
+RUN python manage.py migrate
+RUN python load_fixtures.py
+RUN python manage.py crontab add
