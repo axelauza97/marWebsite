@@ -36,6 +36,7 @@ const router = createBrowserRouter([
             index: true,
             element: <Trips />,
             loader: tripsLoader,
+            action: manipulateTripAction,
           },
           {
             path: ":tripId",

@@ -44,7 +44,7 @@ export async function action({ request }) {
   }
 
   const resData = await response.json();
-  const tokens = resData;
+  const tokens = resData.data;
 
   localStorage.setItem("token", tokens.access);
   localStorage.setItem("token_refresh", tokens.refresh);

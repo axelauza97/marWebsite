@@ -27,9 +27,8 @@ SECRET_KEY = 'django-insecure-l*%!%2tosh@trvpi$d8wv)@_da8@eyu#3)$bhqh!$dbj-##!60
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = ['*'] #acepte todos los dominios
+CORS_ALLOW_ALL_ORIGINS = True # permite que cualquier domini entre; en produccion usar whitelist
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,7 +50,9 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+        #'api.views.CustomTokenAuthentication',
+    ),
+    'EXCEPTION_HANDLER': 'api.views.custom_exception_handler',
 }
 
 CRONJOBS = [

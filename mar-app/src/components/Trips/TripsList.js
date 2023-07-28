@@ -8,14 +8,16 @@ import Button from "../UI/Button";
 function TripsList({ trips }) {
   const submit = useSubmit();
   const deleteHandler = (trip) => {
-    submit(null, {
+    let formData = new FormData();
+    formData.append("id", trip.id);
+    submit(formData, {
       method: "delete",
-      action: `/trips/${trip.id}`,
+      //action: `/trips/${trip.id}`,
       //action: `/trips/${trip.id}/edit`,
       replace: true,
     });
   };
-  const tripsList = trips.map((trip) => (
+  const tripsList = trips.data.map((trip) => (
     <div key={trip.id}>
       <Trip
         key={trip.id}

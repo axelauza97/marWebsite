@@ -12,11 +12,11 @@ export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
   const token = getAuthToken();
-  const tripId = params.tripId;
-
+  let tripId = params.tripId;
   if (method === "DELETE") {
+    tripId = data.get("id");
     const response = await fetch(
-      "http://127.0.0.1:8000/api/trip/delete/" + tripId + "/",
+      "http://127.0.0.1:8000/api/trips/" + tripId + "/",
       {
         method: request.method,
         headers: {
@@ -32,19 +32,20 @@ export async function action({ request, params }) {
         }
       );
     }
+    //window.location.reload();
     return redirect("/");
   }
 
-  let url = "http://127.0.0.1:8000/api/trip/";
+  let url = "http://127.0.0.1:8000/api/trips/";
   let eventData = {
     title: data.get("title"),
     body: data.get("body"),
     button: data.get("button"),
+    //image: data.get("image"),
   };
+  console.log(eventData);
   if (method === "PATCH") {
-    url = url + "update/" + tripId + "/";
-  } else {
-    url = url + "create/";
+    url = url + tripId + "/";
   }
 
   const response = await fetch(url, {

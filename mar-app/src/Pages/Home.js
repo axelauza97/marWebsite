@@ -17,13 +17,9 @@ function Home() {
 export default Home;
 
 async function loadTrips() {
-  const response = await fetch("http://127.0.0.1:8000/api/trip/");
+  const response = await fetch("http://127.0.0.1:8000/api/trips/");
 
   if (!response.ok) {
-    // return {isError: true, message: 'Could not fetch events.' };
-    // throw new Response(JSON.stringify({message: 'Could not fetch events.' }), {
-    //   status: 500,
-    // });
     throw json(
       { message: "Could not fetch trips." },
       {

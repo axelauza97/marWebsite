@@ -3,7 +3,8 @@ import classes from "./SectionTrips.module.css";
 import Trip from "./Trip";
 
 const SectionTrips = (props) => {
-  const tripsList = props.trips.map((trip) => (
+  console.log(props);
+  const tripsList = props.trips.data.map((trip) => (
     <Trip
       key={trip.id}
       title={trip.title}

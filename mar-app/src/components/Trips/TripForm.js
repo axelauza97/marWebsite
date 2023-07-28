@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Form, useNavigation, useSubmit } from "react-router-dom";
 import Input from "../UI/Input";
 import classes from "./TripForm.module.css";
@@ -7,6 +7,8 @@ import Button from "../UI/Button";
 function TripForm({ method, trip }) {
   const titleInputRef = useRef(trip ? trip.title : "");
   const bodyInputRef = useRef(trip ? trip.body : "");
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const submit = useSubmit();
   const navigation = useNavigation();
 
@@ -20,9 +22,13 @@ function TripForm({ method, trip }) {
     if (method === "PATCH") {
       submit(formData, { method: method });
     } else {
-      formData.append("image", trip ? trip.image : "trip01");
       submit(formData, { method: "post", replace: true });
     }
+  };
+
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setSelectedImage(imageFile);
   };
 
   return (
@@ -47,6 +53,17 @@ function TripForm({ method, trip }) {
           defaultValue: `${trip ? bodyInputRef.current : ""}`,
         }}
       />
+      <div>
+        <label htmlFor="image">Select Image:</label>
+        <input
+          type="file"
+          id="image"
+          accept="image/*"
+          onChange={handleImageChange}
+          required
+        />
+      </div>
+
       <Button
         className={classes.form_button}
         onClick={methodHandler}
