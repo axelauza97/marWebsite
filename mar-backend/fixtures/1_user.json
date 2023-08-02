@@ -1,7 +1,7 @@
 [{
     "model": "api.User",
     "fields": {
-        "username": "axela@gmail.com",
+        "email": "axela@gmail.com",
         "password": "12345"
     }
 }]

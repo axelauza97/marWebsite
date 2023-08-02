@@ -33,7 +33,7 @@ def custom_exception_handler(exc, context):
     print(response.status_code)
     print(response.data)
     if response.status_code == status.HTTP_400_BAD_REQUEST:
-        message = response.data.get("username")[0]
+        message = response.data.get("email")[0]
     elif response.status_code == status.HTTP_401_UNAUTHORIZED:
         message = "Authentication credentials were not provided or invalid"
     else:
@@ -124,11 +124,11 @@ class TripViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.request.method == "GET":
-            return [AllowAny()]
+            return [IsAuthenticated()]
         return [AllowAny()]
         return super().get_permissions()
 
-    #GET
+    # GET
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         return Response(
@@ -139,7 +139,8 @@ class TripViewSet(viewsets.ModelViewSet):
             },
             status=status.HTTP_200_OK,
         )
-    #POST
+
+    # POST
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -160,7 +161,8 @@ class TripViewSet(viewsets.ModelViewSet):
             },
             status=status.HTTP_400_BAD_REQUEST,
         )
-    #PATCH
+
+    # PATCH
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)
         return Response(
@@ -171,7 +173,8 @@ class TripViewSet(viewsets.ModelViewSet):
             },
             status=status.HTTP_200_OK,
         )
-    #DELETE
+
+    # DELETE
     def destroy(self, request, *args, **kwargs):
         response = super().destroy(request, *args, **kwargs)
         return Response(

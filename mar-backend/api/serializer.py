@@ -5,27 +5,30 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
-        fields = ( 'username', 'password')
+        fields = ("email", "password")
+
     def create(self, validated_data):
-        password = validated_data.pop('password')
-        validated_data['password'] = make_password(password)
+        password = validated_data.pop("password")
+        validated_data["password"] = make_password(password)
         return super().create(validated_data)
-    
+
+
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
-        fields = '__all__'
+        fields = "__all__"
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         attrs = super().validate(attrs)
         return {
             "pk": self.user.pk,
-            "email": self.user.username,
+            "email": self.user.email,
             **attrs,
         }

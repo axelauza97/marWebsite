@@ -20,7 +20,7 @@ export async function action({ request, params }) {
       {
         method: request.method,
         headers: {
-          Authorization: "JWT " + token,
+          Authorization: "Bearer " + token,
         },
       }
     );
@@ -52,7 +52,7 @@ export async function action({ request, params }) {
     method: method,
     headers: {
       "Content-Type": "application/json",
-      Authorization: "JWT " + token,
+      Authorization: "Bearer " + token,
     },
     body: JSON.stringify(eventData),
   });
