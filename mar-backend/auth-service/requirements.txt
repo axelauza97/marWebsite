@@ -5,3 +5,6 @@ django_crontab
 djangorestframework-simplejwt>=5.2.2
 Pillow
 argon2-cffi
+gunicorn==20.1.0
+psycopg2-binary
+mysqlclient 

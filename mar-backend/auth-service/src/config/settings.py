@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "django_crontab",
-    "rest_framework_simplejwt.token_blacklist",
+    "rest_framework_simplejwt",
 ]
 AUTH_USER_MODEL = "api.User"
 REST_FRAMEWORK = {
@@ -56,7 +56,7 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "api.views.custom_exception_handler",
 }
 
-CRONJOBS = [("*/2 * * * *", "marWebsite.cronjob.cronjob")]
+CRONJOBS = [("*/2 * * * *", "config.cronjob.cronjob")]
 
 
 SIMPLE_JWT = {
@@ -86,7 +86,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-ROOT_URLCONF = "marWebsite.urls"
+ROOT_URLCONF = "config.urls"
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
@@ -111,16 +111,27 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "marWebsite.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+    }
+}"""
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.getenv("NAME", "authservice"),
+        "USER": os.getenv("USER", "root"),
+        "PASSWORD": os.getenv("PASSWORD", "mysql"),
+        "HOST": os.getenv("HOST", "localhost"),
+        "PORT": "3306",
     }
 }
 

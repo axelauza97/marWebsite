@@ -26,3 +26,5 @@ python manage.py migrate
 python load_fixtures.py
 python manage.py crontab add
 ```
+
+http://localhost:4000/auth/

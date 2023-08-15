@@ -24,3 +24,4 @@ RUN python manage.py migrate api
 RUN python manage.py migrate
 RUN python load_fixtures.py
 RUN python manage.py crontab add
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
