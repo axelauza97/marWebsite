@@ -9,9 +9,10 @@ from rest_framework_simplejwt import views as jwt_views
 from rest_framework.routers import DefaultRouter
 
 
+router = DefaultRouter()
+router.register(r"trips", TripViewSet, basename="trips")
+
+
 urlpatterns = [
-    url(r"user/create/$", CreateUser.as_view()),
-    # url(r'token/obtain/$', jwt_views.TokenObtainPairView.as_view(), name='token_create'),  # override sjwt stock token
-    url(r"token/refresh/$", jwt_views.TokenRefreshView.as_view(), name="token_refresh"),
-    url(r"login/$", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    url(r"", include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

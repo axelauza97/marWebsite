@@ -18,7 +18,12 @@ docker-compose up --build
 
 #### 🚀 Thanks for being here
 
+## For running individual
+
+This is a project where I developed a microservice architecture with Django, dividing authentication form fetching trip data
+
 ```bash
+python manage.py collectstatic
 mkdir migrations
 python manage.py makemigrations api
 python manage.py migrate api

@@ -46,11 +46,11 @@ INSTALLED_APPS = [
     "django_crontab",
     "rest_framework_simplejwt",
 ]
-AUTH_USER_MODEL = "api.User"
+
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework_simplejwt.authentication.JWTTokenUserAuthentication",
         #'api.views.CustomTokenAuthentication',
     ),
     "EXCEPTION_HANDLER": "api.views.custom_exception_handler",
@@ -117,14 +117,14 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-"""DATABASES = {
+DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
-}"""
+}
 
-DATABASES = {
+"""DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": os.getenv("NAME", "authservice"),
@@ -133,7 +133,7 @@ DATABASES = {
         "HOST": os.getenv("HOST", "localhost"),
         "PORT": "3306",
     }
-}
+}"""
 
 
 # Password validation
@@ -184,7 +184,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
-MEDIA_URL = "/uploads/"
+MEDIA_URL = "/trip/uploads/"
 CORS_ALLOW_ALL_ORIGINS = (
     True  # permite que cualquier domini entre; en produccion usar whitelist
 )

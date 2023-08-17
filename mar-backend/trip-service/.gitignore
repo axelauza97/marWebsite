@@ -1,0 +1,7 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/api/migrations/
+/api/__pycache__/
+/marWebsite/__pycache__/
+/uploads/

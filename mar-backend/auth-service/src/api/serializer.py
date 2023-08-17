@@ -18,12 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class TripSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Trip
-        fields = "__all__"
-
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         attrs = super().validate(attrs)

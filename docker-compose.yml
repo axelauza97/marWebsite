@@ -7,7 +7,7 @@ services:
   auth-db:
       container_name: mysqldb-auth
       image: mysql/mysql-server:8.0.23
-      command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-file /docker-entrypoint-initdb.d/init.sql
       restart: always
       environment:
         MYSQL_ROOT_PASSWORD: root
@@ -15,12 +15,30 @@ services:
         MYSQL_USER: root
         MYSQL_PASSWORD: root
       volumes:
-        - ./init.sql:/data/application/init.sql
         - ./mysql-data/8.0.23:/var/lib/mysql
+        - ./mysql-init:/docker-entrypoint-initdb.d
       ports:
         - 3307:3306
       expose:
         - 3307
+
+  trip-db:
+      container_name: mysqldb-trip
+      image: mysql/mysql-server:8.0.23
+      command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-file /docker-entrypoint-initdb.d/init.sql
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_ROOT_HOST: "%"
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+      volumes:
+        - ./mysql-data/trip-db:/var/lib/mysql
+        - ./mysql-init:/docker-entrypoint-initdb.d
+      ports:
+        - 3308:3306
+      expose:
+        - 3308
         
   auth-service:
     container_name: auth-service
@@ -35,7 +53,7 @@ services:
         && python manage.py crontab add
         && gunicorn config.wsgi --bind 0.0.0.0:8000
     environment:
-      - SIGNING_KEY=5ahp8kseKOVB_w-DTpQoK4Akl3nVy45Lmbev2NNm95wUyLytIxli6pHccX
+      - SIGNING_KEY=django-insecure-l*%!%2tosh@trvpi$d8wv)@_da8@eyu#3)$bhqh!$dbj-##!60
       - FORCE_SCRIPT_NAME=/auth
       - STATIC_ROOT=/var/www/static
       - NAME=auth
@@ -48,6 +66,31 @@ services:
       - auth-db
     expose:
       - 8000
+
+  trip-service:
+    container_name: trip-service
+    build: ./mar-backend/trip-service/
+    command: 
+      - sh
+      - -c
+      - python manage.py makemigrations api
+        && python manage.py migrate api
+        && python manage.py migrate
+        && python load_fixtures.py
+        && python manage.py crontab add
+        && gunicorn config.wsgi --bind 0.0.0.0:8000
+    environment:
+      - SIGNING_KEY=django-insecure-l*%!%2tosh@trvpi$d8wv)@_da8@eyu#3)$bhqh!$dbj-##!60
+      - FORCE_SCRIPT_NAME=/trip
+      - STATIC_ROOT=/var/www/static
+      - NAME=trip
+      - USER=root
+      - HOST=trip-db
+      - PASSWORD=root
+    volumes:
+      - static:/var/www/static
+    depends_on:
+      - trip-db
 
   nginx:
     container_name: nginx-service

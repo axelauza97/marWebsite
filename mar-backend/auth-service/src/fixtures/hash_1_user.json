@@ -1,0 +1,1 @@
+[{"model": "api.User", "fields": {"email": "axela@gmail.com", "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$VTlzQlhEcnd6dDE4YkJWa2poVmhMTA$4v9wrJ51f1+dtr0h2lFGBgBWIUoS3RiuvdDi+mmwRUQ"}}]
