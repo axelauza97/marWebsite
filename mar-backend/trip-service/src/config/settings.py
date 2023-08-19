@@ -22,7 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SIGNING_KEY", "")
+SECRET_KEY = os.getenv(
+    "SIGNING_KEY", "django-insecure-l*%!%2tosh@trvpi$d8wv)@_da8@eyu#3)$bhqh!$dbj-##!60"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_crontab",
     "rest_framework_simplejwt",
+    "drf_yasg",
 ]
 
 REST_FRAMEWORK = {
@@ -172,11 +175,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "web/static"),
-]
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.getenv("STATIC_ROOT", "/static/")
+
+
+"""STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]"""
 
 
 # Default primary key field type
@@ -184,7 +191,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
-MEDIA_URL = "/trip/uploads/"
+MEDIA_URL = "/uploads/"
 CORS_ALLOW_ALL_ORIGINS = (
     True  # permite que cualquier domini entre; en produccion usar whitelist
 )

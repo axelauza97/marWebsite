@@ -35,9 +35,9 @@ class TripViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.request.method == "GET":
-            return [IsAuthenticated()]
-        return [AllowAny()]
-        return super().get_permissions()
+            return [AllowAny()]
+        return [IsAuthenticated()]
+        # return super().get_permissions()
 
     # GET
     def list(self, request, *args, **kwargs):
