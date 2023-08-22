@@ -1,8 +1,20 @@
 # Mar Website
 
-This project is focused to show a Website SPA with responsive design in React.js framework.
+- This project is focused to show a Website SPA with responsive design in React.js framework.
 
-Here you can create a new user and then create new trips, customize others and also delete it.
+- Here you can Create a new user and then Create new trips, Customize others and also Delete them.
+
+- This is a project where I developed a microservice backend architecture with Django, dividing authentication from fetching trip data.
+
+## Architecture
+
+![architecture](https://github.com/axelauza97/portfolio/assets/35442831/1cbad16a-fc33-4d6e-8333-f5d86185f57b)
+
+### Note
+
+- Auth service use JWT token authentication.
+- On request to protected endpoints on Trip service it validates the token with the same key that has Auth service.
+- This architecture can be translated to Kubernetes files for production environment.
 
 ## Installation
 
@@ -14,13 +26,9 @@ docker network create mar_network
 docker-compose up --build
 ```
 
-#### Develop by Axel Auza
+## For running each Django service individual
 
-#### 🚀 Thanks for being here
-
-## For running individual
-
-This is a project where I developed a microservice architecture with Django, dividing authentication form fetching trip data
+Run in bash
 
 ```bash
 python manage.py collectstatic
@@ -32,4 +40,6 @@ python load_fixtures.py
 python manage.py crontab add
 ```
 
-http://localhost:4000/auth/
+#### Develop by Axel Auza
+
+#### 🚀 Thanks for being here and feel free to contribute or give feedback
