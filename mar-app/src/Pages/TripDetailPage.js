@@ -17,7 +17,7 @@ function TripDetailPage() {
 export default TripDetailPage;
 
 async function loadTrip(id) {
-  const response = await fetch("http://127.0.0.1:8000/api/trips/" + id + "/");
+  const response = await fetch("http://127.0.0.1/api/trips/" + id + "/");
 
   if (!response.ok) {
     throw json(

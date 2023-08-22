@@ -109,6 +109,21 @@ services:
       - auth-service
       - trip-service
 
+  mar-app:
+    build:
+      context: ./mar-app/
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:80"
+    container_name: mar-app
+    tty: true
+    networks:
+      - mar-net
+    depends_on:
+      - nginx
+  
+
+
 networks:
   mar-net:
     external:

@@ -17,7 +17,7 @@ function Home() {
 export default Home;
 
 async function loadTrips() {
-  const response = await fetch("http://127.0.0.1:8000/api/trips/");
+  const response = await fetch("http://127.0.0.1/api/trips/");
 
   if (!response.ok) {
     throw json(

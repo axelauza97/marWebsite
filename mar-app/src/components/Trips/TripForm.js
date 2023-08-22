@@ -19,10 +19,18 @@ function TripForm({ method, trip }) {
     formData.append("title", titleInputRef.current.value);
     formData.append("body", bodyInputRef.current.value);
     formData.append("button", trip ? trip.button : titleInputRef.current.value);
+    formData.append("user", localStorage.getItem("pk"));
+    if (selectedImage != null) {
+      formData.append("image", selectedImage);
+    }
     if (method === "PATCH") {
-      submit(formData, { method: method });
+      submit(formData, { method: method, encType: "application/json" });
     } else {
-      submit(formData, { method: "post", replace: true });
+      submit(formData, {
+        method: "POST",
+        replace: true,
+        encType: "application/json",
+      });
     }
   };
 

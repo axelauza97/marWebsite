@@ -1,6 +1,6 @@
 import React from "react";
 import { Suspense } from "react";
-import { useLoaderData, json, defer, Await } from "react-router-dom";
+import { useLoaderData, Await } from "react-router-dom";
 import TripsList from "../components/Trips/TripsList";
 
 function Trips() {
@@ -16,25 +16,3 @@ function Trips() {
 }
 
 export default Trips;
-
-async function loadTrips() {
-  const response = await fetch("http://localhost:8080/api/trips/");
-
-  if (!response.ok) {
-    throw json(
-      { message: "Could not fetch trips." },
-      {
-        status: 500,
-      }
-    );
-  } else {
-    const resData = await response.json();
-    return resData.events;
-  }
-}
-
-export function loader() {
-  return defer({
-    trips: loadTrips(),
-  });
-}

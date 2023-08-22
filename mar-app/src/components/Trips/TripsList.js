@@ -11,10 +11,7 @@ function TripsList({ trips }) {
     let formData = new FormData();
     formData.append("id", trip.id);
     submit(formData, {
-      method: "delete",
-      //action: `/trips/${trip.id}`,
-      //action: `/trips/${trip.id}/edit`,
-      replace: true,
+      method: "DELETE",
     });
   };
   const tripsList = trips.data.map((trip) => (

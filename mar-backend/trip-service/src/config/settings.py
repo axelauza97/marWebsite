@@ -57,6 +57,10 @@ REST_FRAMEWORK = {
         #'api.views.CustomTokenAuthentication',
     ),
     "EXCEPTION_HANDLER": "api.views.custom_exception_handler",
+    "DEFAULT_PARSER_CLASSES": (
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.MultiPartParser",
+    ),
 }
 
 CRONJOBS = [("*/2 * * * *", "config.cronjob.cronjob")]

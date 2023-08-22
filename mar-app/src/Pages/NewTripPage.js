@@ -2,6 +2,7 @@ import React from "react";
 import TripForm from "../components/Trips/TripForm";
 import { getAuthToken } from "../components/util/auth";
 import { json, redirect } from "react-router";
+import axios from "axios";
 
 function NewTripPage() {
   return <TripForm />;
@@ -13,17 +14,15 @@ export async function action({ request, params }) {
   const data = await request.formData();
   const token = getAuthToken();
   let tripId = params.tripId;
+  let url = "http://127.0.0.1/api/trips/";
   if (method === "DELETE") {
     tripId = data.get("id");
-    const response = await fetch(
-      "http://127.0.0.1:8000/api/trips/" + tripId + "/",
-      {
-        method: request.method,
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    const response = await fetch(url + tripId + "/", {
+      method: request.method,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
     if (!response.ok) {
       throw json(
         { message: "Could not delete trip." },
@@ -31,39 +30,44 @@ export async function action({ request, params }) {
           status: 500,
         }
       );
+    } else {
+      window.history.back();
+      return redirect("/");
     }
-    //window.location.reload();
-    return redirect("/");
   }
 
-  let url = "http://127.0.0.1:8000/api/trips/";
-  let eventData = {
+  /*let eventData = {
     title: data.get("title"),
     body: data.get("body"),
     button: data.get("button"),
-    //image: data.get("image"),
-  };
-  console.log(eventData);
+    user: data.get("user"),
+    image: data.get("image"),
+  };*/
   if (method === "PATCH") {
     url = url + tripId + "/";
+    await axios
+      .patch(url, data, {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {})
+      .catch((err) => {
+        throw json({ message: "Could not save trip." }, { status: 500 });
+      });
+  } else if (method === "POST") {
+    await axios
+      .post(url, data, {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {})
+      .catch((err) => {
+        throw json({ message: "Could not save trip." }, { status: 500 });
+      });
   }
-
-  const response = await fetch(url, {
-    method: method,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-    body: JSON.stringify(eventData),
-  });
-
-  if (response.status === 422) {
-    return response;
-  }
-
-  if (!response.ok) {
-    throw json({ message: "Could not save trip." }, { status: 500 });
-  }
-
   return redirect("/");
 }

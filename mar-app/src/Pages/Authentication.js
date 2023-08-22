@@ -27,7 +27,7 @@ export async function action({ request }) {
     password: data.get("password"),
   };
 
-  const response = await fetch("http://127.0.0.1:8000/api/" + mode, {
+  const response = await fetch("http://127.0.0.1/auth/api/" + mode, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,6 +48,7 @@ export async function action({ request }) {
 
   localStorage.setItem("token", tokens.access);
   localStorage.setItem("token_refresh", tokens.refresh);
+  localStorage.setItem("pk", resData.data.pk);
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem("expiration", expiration.toISOString());
