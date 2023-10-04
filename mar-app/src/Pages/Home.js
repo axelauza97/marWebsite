@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import SectionTrips from "../components/Trips/SectionTrips";
-import { Await, defer, json, useLoaderData } from "react-router";
+import { Await, defer, json, useLoaderData } from "react-router-dom";
 
 function Home() {
   const { trips } = useLoaderData();
@@ -11,14 +11,24 @@ function Home() {
       </Await>
     </Suspense>
   );
-  //return <SectionTrips />;
 }
 
 export default Home;
 
 async function loadTrips() {
-  const response = await fetch("http://127.0.0.1/api/trips/");
-
+  const response = await fetch("http://127.0.0.1/api/trips/").catch((error) => {
+    throw json(
+      { message: "Could not fetch trips." },
+      {
+        status: 404,
+      }
+    );
+  });
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true);
+    }, "1000");
+  });
   if (!response.ok) {
     throw json(
       { message: "Could not fetch trips." },

@@ -1,0 +1,46 @@
+.container {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.loading {
+  font-size: 2rem;
+  background-color: white;
+  padding: 5rem;
+  text-align: center;
+  border-radius: 1rem;
+  animation: pop 0.7s cubic-bezier(0.17, 0.67, 0.54, 1.34) both;
+}
+
+.show {
+  place-content: center;
+  display: grid;
+}
+
+.close {
+  animation: pop_close 0.7s cubic-bezier(0.39, 0.13, 1, 0.64) both;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pop_close {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

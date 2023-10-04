@@ -1,8 +1,16 @@
-import React, { useRef, useState } from "react";
-import { Form, useNavigation, useSubmit } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+  useSubmit,
+} from "react-router-dom";
 import Input from "../UI/Input";
 import classes from "./TripForm.module.css";
 import Button from "../UI/Button";
+import { useDispatch } from "react-redux";
+import { showNotification } from "../../store/ui-actions";
 
 function TripForm({ method, trip }) {
   const titleInputRef = useRef(trip ? trip.title : "");
@@ -11,6 +19,30 @@ function TripForm({ method, trip }) {
 
   const submit = useSubmit();
   const navigation = useNavigation();
+  const data = useActionData();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(data);
+    if (data != null && data.status === 201) {
+      let message = {
+        status: "success",
+        title: "Created Post",
+        message: data.data.message,
+      };
+      dispatch(showNotification(message));
+      navigate("../");
+    } else if (data != null && data.status === 200) {
+      let message = {
+        status: "success",
+        title: "Updated Post",
+        message: data.data.message,
+      };
+      dispatch(showNotification(message));
+      navigate("../../");
+    }
+  }, [data]);
 
   const isSubmitting = navigation.state === "submitting";
   const methodHandler = (event) => {
@@ -28,7 +60,7 @@ function TripForm({ method, trip }) {
     } else {
       submit(formData, {
         method: "POST",
-        replace: true,
+        //replace: true,
         encType: "application/json",
       });
     }

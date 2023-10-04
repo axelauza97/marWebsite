@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./AuthenticationForm.module.css";
 import {
+  Form,
   useActionData,
   useNavigate,
   useNavigation,
@@ -8,6 +9,8 @@ import {
 } from "react-router-dom";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
+import { useDispatch } from "react-redux";
+import { showNotification } from "../../store/ui-actions";
 
 function AuthenticationForm() {
   const emailInputRef = useRef();
@@ -18,6 +21,8 @@ function AuthenticationForm() {
 
   const navigate = useNavigate();
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -41,20 +46,37 @@ function AuthenticationForm() {
     formData.append("password", passwordInputRef.current.value);
     submit(formData, { method: "post", replace: true });
   };
+  useEffect(() => {
+    console.log(data);
+    if (data != null && data.status === 200) {
+      let data1 = {
+        status: "success",
+        title: "Login",
+        message: data.message,
+      };
+      dispatch(showNotification(data1));
+      navigate("/");
+    }
+  }, [data]);
+
   return (
-    <div className={classes.containerAuth}>
+    <Form
+      className={classes.containerAuth}
+      method="post"
+      /*action="./"*/
+    >
       <h1> {isLogin ? "Log In" : "Sign Up"} </h1>
       <Input
         className={classes.form_input}
         ref={emailInputRef}
         label="Email"
-        input={{ id: "email", type: "text" }}
+        input={{ id: "email", type: "text", name: "email" }}
       />
       <Input
         className={classes.form_input}
         ref={passwordInputRef}
         label="Password"
-        input={{ id: "password", type: "password" }}
+        input={{ id: "password", type: "password", name: "password" }}
       />
       <div className={classes.containerButton}>
         <Button className={classes.form_button} onClick={modeHandler}>
@@ -64,6 +86,7 @@ function AuthenticationForm() {
           className={classes.form_button}
           onClick={postHandler}
           disabled={isSubmitting}
+          type="submit"
         >
           {isLogin ? "Login" : "Save"}
         </Button>
@@ -72,7 +95,7 @@ function AuthenticationForm() {
       {data && data.errors && (
         <div>{Object.values(data.errors).map((err) => err)} </div>
       )}
-    </div>
+    </Form>
   );
 }
 

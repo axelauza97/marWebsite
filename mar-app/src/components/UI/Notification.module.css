@@ -1,0 +1,52 @@
+.notification {
+  width: 100%;
+  height: 3rem;
+  justify-content: space-between;
+  padding: 0.5rem 10%;
+  align-items: center;
+  color: white;
+  position: sticky;
+  top: 5rem;
+  display: none;
+}
+
+.notification h2,
+.notification p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.error {
+  background-color: #690000;
+}
+
+.success {
+  background-color: #1ad1b9;
+}
+
+.show {
+  display: flex;
+  animation: pop 0.7s cubic-bezier(0.17, 0.67, 0.54, 1.34) both;
+}
+
+.close {
+  animation: pop_close 0.7s cubic-bezier(0.39, 0.13, 1, 0.64) both;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pop_close {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

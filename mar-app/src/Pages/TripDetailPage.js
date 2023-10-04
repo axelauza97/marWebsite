@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import TripForm from "../components/Trips/TripForm";
-import { Await, defer, json, useRouteLoaderData } from "react-router";
+import { Await, defer, json, useRouteLoaderData } from "react-router-dom";
 
 function TripDetailPage() {
   const { trip } = useRouteLoaderData("trip-detail");
